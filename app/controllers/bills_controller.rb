@@ -1,5 +1,5 @@
 class BillsController < ApplicationController
-  get '/bags' do
+  get '/bills' do
     redirect_if_not_logged_in
     @bills = Bill.all
     erb :'bills/index'

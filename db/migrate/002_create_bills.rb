@@ -3,6 +3,7 @@ class CreateBills < ActiveRecord::Migration
     create_table :bills do |t|
       t.string :name
       t.float :amount
+      t.integer :user_id
   end
 end
 end
