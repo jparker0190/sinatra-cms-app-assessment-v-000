@@ -1,0 +1,8 @@
+<h1>Edit<%=@bill.name%></h1>
+<form action="/bills/<%=@bill.id%>" method="post">
+  <label>Bill Name</label>
+  <input type="text" name="name" value="<%=@bill.name%>"><br>
+  <label>Bill Amount</label>
+  <input type="number" name="bill" value="<%=@bill.amount%>"></br>
+  <input type="submit" value="Update">
+</form>

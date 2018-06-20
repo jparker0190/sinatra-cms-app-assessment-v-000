@@ -1,0 +1,6 @@
+Here are you Bills, <%=@user.username%>
+  <%@user.bills.each do |bill| %>
+  <ul>
+    <li><a href="/bills/<%=bill.id%>"><%=bill.name%></a></li>
+  </ul>
+  <%end%>
