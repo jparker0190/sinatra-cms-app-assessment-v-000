@@ -1,0 +1,11 @@
+<h1>Edit <%= @property.name %></h1>
+
+<form action="/property/<%=@property.id %>" method="POST">
+  <label> Property Name </label>
+  <input type="text" name="name" value="<%=@property.name %>"> </br>
+
+  <label> Room Capacity </label>
+  <input type="number" name="rooms" value="<%=@property.rooms %>"> </br>
+
+  <input type="submit" value="Update">
+</form>

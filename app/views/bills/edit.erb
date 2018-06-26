@@ -1,8 +1,18 @@
-<h1>Edit<%=@bill.name%></h1>
-<form action="/bills/<%=@bill.id%>" method="post">
-  <label>Bill Name</label>
-  <input type="text" name="name" value="<%=@bill.name%>"><br>
-  <label>Bill Amount</label>
-  <input type="number" name="bill" value="<%=@bill.amount%>"></br>
+<h1>Edit <%= @bill.name %></h1>
+
+<form action="/bills/<%=@bill.id %>" method="POST">
+  <label> Club Name </label>
+  <input type="text" name="name" value="<%=@bill.name %>"> </br>
+
+  <label> Property </label>
+  <input type="text" name="amount" value="<%=@bill.amount%>"> </br>
+
+  <label> Which Property does this belong in? </label>
+  <select name="property_id">
+    <% current_user.property_id.each do |bill| %>
+      <option value=<%=bill.id %> <%= "selected" if bill.id==@bill.property.id %> ><%= bill.name %></option>
+    <% end %>
+  </select>
+
   <input type="submit" value="Update">
 </form>
