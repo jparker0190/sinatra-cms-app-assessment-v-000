@@ -1,18 +1,15 @@
-<h1>Edit <%= @bill.name %></h1>
-
-<form action="/bills/<%=@bill.id %>" method="POST">
-  <label> Club Name </label>
-  <input type="text" name="name" value="<%=@bill.name %>"> </br>
-
-  <label> Property </label>
-  <input type="text" name="amount" value="<%=@bill.amount%>"> </br>
-
-  <label> Which Property does this belong in? </label>
-  <select name="property_id">
-    <% current_user.property_id.each do |bill| %>
-      <option value=<%=bill.id %> <%= "selected" if bill.id==@bill.property.id %> ><%= bill.name %></option>
-    <% end %>
-  </select>
-
-  <input type="submit" value="Update">
+<h1>Edit Your Bill</h1>
+<form action="/bills/<%= @bill.slug %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label>Name:</label><input type="text" id="Name" name="bill[name]" value="<%= @bill.name %>"><br><br>
+  <label>Bill:</label><input type="text" id="User Name" name="bill[user]" value="<%= @bill.user.name %>"><br><br>
+  <label>Property:</label><br>
+  <% Genre.all.each do |prop| %>
+    <input type="checkbox" id="<%= prop.name %>" name="bill[properties][]" value="<%= prop.id %>" <%='checked' if @bill.properties.include?(prop) %>>
+    <%= prop.name %>
+    </input>
+    <br>
+  <% end %>
+  <br>
+  <input type="submit" value="Save">
 </form>

@@ -1,6 +1,7 @@
-Here are you Bills, <%=@user.username%>
-  <%@user.bills.each do |bill| %>
-  <ul>
-    <li><a href="/bills/<%=bill.id%>"><%=bill.name%></a></li>
-  </ul>
-  <%end%>
+<h1>Property Name: <%= @user.name %></h1>
+<h2>Property's Bills:</h2>
+<ul>
+  <% @user.bills.each do |bill| %>
+      <li><a href="/user/<%= bill.slug %>"><%= bill.name %></a></li>
+  <% end %>
+</ul>

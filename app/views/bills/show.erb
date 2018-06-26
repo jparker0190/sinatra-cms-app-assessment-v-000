@@ -1,6 +1,5 @@
-<%= @bill.name %><br />
-  <%= @bill.amount %> <br />
-  Bill: <a href="/bills/<%=@bill.property.id%>"><%= @bill.property.name %></a> <br />
-  <a href="/bills/<%=@bill.id%>/edit">Edit</a>
-  <br />
-  <br />
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<h1>Bill - <%= @bill.name %></h1>
+<a href="/songs/<%= @song.slug %>/edit"><input type="button" value="Edit Song"></a>

@@ -1,7 +1,6 @@
-<% @property.each do |property| %>
-  <%= property.name %><br />
-  <%= property.rooms %> <br />
-  <a href="/property/<%=property.id%>/edit">Edit</a>
-  <br />
-  <br />
-<% end %>
+<h1>List of all Properties</h1>
+<ul>
+  <% @prop.each do |prop| %>
+      <li><a href="/property/<%= prop.slug %>"><%= prop.name %></a></li>
+  <% end %>
+</ul>
