@@ -43,4 +43,3 @@ class BillsController < ApplicationController
     redirect "/bills"
   end
 end
-Bills

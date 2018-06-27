@@ -9,7 +9,7 @@
 
   <label> Which Property does this belong in? </label>
   <select name="property_id">
-    <% current_user.properties.each do |prop| %>
+    <% current_user.property.each do |prop| %>
       <option value=<%=prop.id %>><%= prop.name %></option>
     <% end %>
   </select>
