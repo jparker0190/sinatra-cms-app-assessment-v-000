@@ -1,78 +1,46 @@
 class BillsController < ApplicationController
-  enable :sessions
-  use Rack::Flash
-  register Sinatra::ActiveRecordExtension
-  set :session_secret, "my_application_secret"
-  set :views, Proc.new { File.join(root, "../views/") }
-
-  get '/bills' do
-    @bill = Bill.all
-    erb :"bills/index"
+  get "/bills" do
+    redirect_if_not_logged_in
+    @bill = Bills.all
+    erb :'bills/index'
   end
 
-  get '/bills/new' do
-    @prop = Property.all
-    erb :"bills/new"
+  get "/bills/new" do
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    erb :'bills/new'
   end
 
-  post '/bills' do
-    @bill = Bill.create(:name => params[:bill][:name])
-
-    user_entry = params[:bill][:user]
-    if User.find_by(:name => user_entry)
-      user = User.find_by(:name => user_entry)
-    else
-      user = User.create(:name => user_entry)
-    end
-    @bill.user = user
-
-    property_selections = params[:bill][:properties]
-    property_selections.each do |property|
-      @bill.property << Property.find(property)
-    end
-
-    @bill.save
-
-    flash[:message] = "Successfully created bill."
-    redirect to "bills/#{@bill.slug}"
-
+  get "/bills/:id/edit" do
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    @bill = Bills.find(params[:id])
+    erb :'bills/edit'
   end
 
-  get '/bills/:slug' do
-    slug = params[:slug]
-    @bill = Bill.find_by_slug(slug)
-    erb :"bills/show"
+  post "/bills/:id" do
+    redirect_if_not_logged_in
+    @bill = Bills.find(params[:id])
+    unless Bills.valid_params?(params)
+      redirect "/bills/#{@bill.id}/edit?error=invalid bill"
+    end
+    @bill.update(params.select{|k|k=="name" || k=="amount" || k=="property_id"})
+    redirect "/bills/#{@bill.id}"
   end
 
-  patch '/bills/:slug' do
-    bill = Bill.find_by_slug(params[:slug])
-    bill.name = params[:bill][:name]
-
-    user_name = params[:bill][:user]
-    if User.find_by(:name => user_name)
-      if bill.user.name != user_name
-        bill.user = User.find_by(:name => user_name)
-      end
-    else
-      bill.user = User.create(:name => user_name)
-    end
-
-    if bill.prop
-      bill.prop.clear
-    end
-    props = params[:bill][:properties]
-    props.each do |prop|
-      prop.bills << Property.find(prop)
-    end
-
-    bill.save
-    flash[:message] = "Successfully updated bill."
-    redirect to "bills/#{bill.slug}"
+  get "/bills/:id" do
+    redirect_if_not_logged_in
+    @bill = Bills.find(params[:id])
+    erb :'bills/show'
   end
 
-  get '/bills/:slug/edit' do
-    slug = params[:slug]
-    @bill = Bill.find_by_slug(slug)
-    erb :"bills/edit"
+  post "/bills" do
+    redirect_if_not_logged_in
+    unless Bills.valid_params?(params)
+      redirect "/bills/new?error=invalid bill"
+    end
+    Bills.create(params)
+    redirect "/bills"
   end
 end
+Bills

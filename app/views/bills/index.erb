@@ -1,6 +1,7 @@
-<h1>All Bills</h1>
-<ul>
-  <% @bills.each do |s| %>
-    <li><a href="/bills/<%= s.slug %>"><%= s.name %></a></li>
-  <% end %>
-</ul>
+<<% @bill.each do |bill| %>
+  <%= bill.name %><br />
+  <%= bill.amount %> <br />
+  <a href="/bills/<%=bill.id%>/edit">Edit</a>
+  <br />
+  <br />
+<% end %>

@@ -1,7 +1,6 @@
-<h1>Property Name: <%= @user.name %></h1>
-<h2>Property's Bills:</h2>
-<ul>
-  <% @user.bills.each do |bill| %>
-      <li><a href="/user/<%= bill.slug %>"><%= bill.name %></a></li>
-  <% end %>
-</ul>
+<p> Here are your Properties, <%= @user.username %>
+<% @user.properties.each do |prop| %>
+  <ul>
+    <li><a href="/property/<%=prop.id%>"><%= prop.name %></a></li>
+  </ul>
+<% end %>

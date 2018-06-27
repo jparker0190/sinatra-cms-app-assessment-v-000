@@ -1,7 +1,12 @@
-<h1>Property Name: <%= @prop.name %></h1>
-<h2>Property's Bills:</h2>
+<%= @prop.name %><br />
+<%= @prop.rooms %> <br />
+
+<h2>Bills</h2>
 <ul>
-  <% @prop.bills.each do |bill| %>
-      <li><a href="/bills/<%= bill.slug %>"><%= bill.name %></a></li>
-  <% end %>
+<% @prop.properties.each do |bill| %>
+  <li><a href="/bills/<%=bill.id%>"><%= bill.name %></a></li>
+<% end%>
 </ul>
+<a href="/property/<%=@prop.id%>/edit">Edit</a>
+<br />
+<br />

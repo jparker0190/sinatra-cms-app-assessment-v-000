@@ -1,12 +1,18 @@
-<h1>Create a new Bill</h1>
+<h1>Add a New Bill</h1>
 
 <form action="/bills" method="POST">
-<label>Name:</label><input type="text" name="bill[name]" id="Name"><br>
-<label>User:</label><input type="text" name="bill[user]" id="User Name"><br>
-<label>Property:</label><br>
-<% @prop.each do |prop| %>
-  <input id="<%= prop.name %>" type="checkbox" name="bill[properties][]" value="<%= prop.id %>"><%= prop.name %><br>
-<% end %>
-<br><br>
-<input type="submit" value="Create">
+  <label> Bill Name </label>
+  <input type="text" name="name"> </br>
+
+  <label> Bill Amount </label>
+  <input type="text" name="amount"> </br>
+
+  <label> Which Property does this belong in? </label>
+  <select name="property_id">
+    <% current_user.properties.each do |prop| %>
+      <option value=<%=prop.id %>><%= prop.name %></option>
+    <% end %>
+  </select>
+
+  <input type="submit" value="Create">
 </form>
