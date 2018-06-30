@@ -1,11 +1,13 @@
-<h1>Edit <%= @prop.name %></h1>
+<center><h1>Edit <%= @prop.name %></h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 <form action="/bills/<%=@prop.id %>" method="POST">
-  <label> Bag Name </label>
+  <label> Name </label>&nbsp;&nbsp;
   <input type="text" name="name" value="<%=@prop.name %>"> </br>
 
-  <label> Room Capacity </label>
+  <label> Rooms </label>
   <input type="number" name="rooms" value="<%=@prop.rooms %>"> </br>
-
+  <a href="/property">Return to Property Page</a>
   <input type="submit" value="Update">
 </form>
+</center>

@@ -1,4 +1,6 @@
 <p> Here are your Properties, <%= @user.username %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 <% @user.properties.each do |prop| %>
   <ul>
     <li><a href="/property/<%=prop.id%>"><%= prop.name %></a></li>
