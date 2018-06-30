@@ -1,11 +1,14 @@
-<center><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<center>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <h2>Here are you current properties</h2>
-<% @prop.each do |prop| %>
-  <label>Property:</label> <%= prop.name %><br />
-  <label>Rooms Capacity:</label> <%= prop.rooms %> <br />
-  Edit: <%=prop.name %> <a href = "/bills/index/prop.id">Bills</a>&nbsp;
-  <a href="/property/<%=prop.id%>/edit">Property Info</a>
-  <br />
-  <br />
-<% end %>
+  <% @prop.each do |prop| %>
+    <label>Property:</label> <%= prop.name %><br />
+    <label>Rooms Capacity:</label> <%= prop.rooms %> <br />
+    Edit: <a href="/property/<%=prop.id%>/edit"> <%=prop.name %></a></br>
+    <br>
+
+  <% end %>
+
+<a href="/property/new">Create New Property</a><br>
+<a href="/logout"> Log Out </a>
 </center>

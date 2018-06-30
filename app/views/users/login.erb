@@ -1,13 +1,10 @@
-<center><h1>Login to Bill_App!</h1></center>
+<center><h1>Login</h1>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
-<ul>
-  <li>
-<center><form method="post" action="/login">
-  <input type="text" name="username" placeholder="Username:">
-  <input type="text" name="password" placeholder="Password:">
-
-  <input type="submit" value="submit"></li>
-</form>
-</ul>
+  <form action='/login' method="POST">
+    <label>Username: </label><input type="text" name="username"placeholder="Enter Username"><br>
+    <label>Password: </label><input type="text" name="password"placeholder="Enter Password"><br>
+    <input class="btn btn-primary" type="submit"value="Log In"><br><br>
+    <a href='/'>Back to HomePage</a>
+  </form>
 </center>

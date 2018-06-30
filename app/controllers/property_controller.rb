@@ -30,7 +30,7 @@ class PropertyController < ApplicationController
 
   get "/property/:id" do
     redirect_if_not_logged_in
-    @prop = Property.find(params[:id])
+    @prop = Property.find_by_id(params[:id])
     erb :'properties/show'
   end
 

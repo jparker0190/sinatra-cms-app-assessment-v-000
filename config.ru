@@ -6,6 +6,5 @@ end
 
 use Rack::MethodOverride
 use PropertyController
-use BillsController
 use UsersController
 run ApplicationController

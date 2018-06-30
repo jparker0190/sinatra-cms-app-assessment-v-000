@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
-    has_secure_password
-    has_many :property
+  include Slugifiable::InstanceMethods
+	extend Slugifiable::ClassMethods
+  validates :username, uniqueness: true
+  has_many :propertys
 end

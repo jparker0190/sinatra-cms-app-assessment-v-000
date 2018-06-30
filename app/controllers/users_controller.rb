@@ -1,41 +1,33 @@
 class UsersController < ApplicationController
-  get '/users/:id' do
-      if !logged_in?
-        redirect '/property'
-      end
-
-      @user = User.find(params[:id])
-      if !@user.nil? && @user == current_user
-        erb :'users/show'
-      else
-        redirect '/property'
-      end
+  get '/users/:slug' do
+      @user = User.find_by_slug(params[:slug])
+      erb :'users/show'
     end
 
     get '/signup' do
-      if !session[:user_id]
-        erb :'users/new'
+      if !logged_in?
+        erb :'users/new', locals: {message: "Please sign up before you sign in"}
       else
-        redirect to '/bills'
+        redirect to '/property'
       end
     end
 
     post '/signup' do
-      if params[:username] == "" || params[:password] == ""
+      if params[:username] == "" || params[:email] == "" || params[:password] == ""
         redirect to '/signup'
       else
-        @user = User.create(:username => params[:username], :password => params[:password])
+        @user = User.new(:username => params[:username],:password => params[:password])
+        @user.save
         session[:user_id] = @user.id
-        redirect '/property'
+        redirect to '/property'
       end
     end
 
     get '/login' do
-      @error_message = params[:error]
-      if !session[:user_id]
+      if !logged_in?
         erb :'users/login'
       else
-        redirect '/property'
+        redirect to '/property'
       end
     end
 
@@ -43,14 +35,14 @@ class UsersController < ApplicationController
       user = User.find_by(:username => params[:username])
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect "/property"
+        redirect to "/property"
       else
         redirect to '/signup'
       end
     end
 
     get '/logout' do
-      if session[:user_id] != nil
+      if logged_in?
         session.destroy
         redirect to '/login'
       else
