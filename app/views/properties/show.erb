@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <center>
-<p> Welcome, <%= current_user.username %>
-<h2>Here are you current properties</h2>
+  <h2><br>Here is your update? Likey?</h2>
+<label>Name: </label><%= @prop.name %><br>
+<label>Rooms: </label><%= @prop.rooms %>
 
-<% @prop.each do |prop| %>
-  <div>
-    <label>Property:</label> <%= prop.name %><br />
-    <label>Rooms Capacity:</label> <%= prop.rooms %> <br />
-    Edit: <a href = "/property/index/prop.id"><%=prop.name%></a>&nbsp;
-  </div>
-<% end %>
-</center
+<form method="post" action="/property/<%=@prop.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" class="btn btn-primary"value="Delete Update"><br>
+  <a href="/property">Keep Update </a><br>
+  <a href="/property/<%=@prop.id%>/edit">Edit Update </a>
+</form>
+</center>

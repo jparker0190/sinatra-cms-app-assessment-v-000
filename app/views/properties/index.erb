@@ -1,7 +1,8 @@
 <center>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<h2>Welcome, <%=current_user.username%></h2>
 <h2>Here are you current properties</h2>
-  <% @prop.each do |prop| %>
+  <% current_user.propertys.each do |prop| %>
     <label>Property:</label> <%= prop.name %><br />
     <label>Rooms Capacity:</label> <%= prop.rooms %> <br />
     Edit: <a href="/property/<%=prop.id%>/edit"> <%=prop.name %></a></br>
