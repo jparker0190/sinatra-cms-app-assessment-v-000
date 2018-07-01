@@ -1,6 +1,6 @@
 <center>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<h2>Welcome, <%=current_user.username%></h2>
+<h1>Welcome, <%=current_user.username%></h1>
 <h2>Here are you current properties</h2>
   <% current_user.propertys.each do |prop| %>
     <label>Property:</label> <%= prop.name %><br />
