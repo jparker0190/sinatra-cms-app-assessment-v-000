@@ -1,7 +1,9 @@
 <center>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <h2>Users</h2>
-
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
 <h3>Sign Up</h3>
 <form action="/signup" method="POST">
   <label>Username: &nbsp;</label><input type="text" name="username"placeholder="Enter Username"><br>
