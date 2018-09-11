@@ -1,6 +1,11 @@
 <p> Here are your Properties</p>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
+  <% flash.keys.each do |type| %>
+    <div data-alert class="flash <%= type %> alert-box radius">
+      <%= flash[type] %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  <% end %>
 <% @user.properties.each do |prop| %>
   <ul>
     <li><a href="/property/<%=prop.id%>"><%= prop.name %></a></li>

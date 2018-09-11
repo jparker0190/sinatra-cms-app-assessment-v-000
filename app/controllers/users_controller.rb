@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   get '/users/:slug' do
       @user = User.find_by_slug(params[:slug])
       erb :'users/show'
@@ -6,16 +7,20 @@ class UsersController < ApplicationController
 
     get '/signup' do
       if !logged_in?
-        erb :'users/new', locals: {message: "Please sign up before you sign in"}
+        flash[:notice] = "Hooray, Flash is working!"
+        erb :'users/new'
+
       else
         redirect to '/property'
       end
     end
 
     post '/signup' do
-      if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      if params[:username] == "" || params[:password] == ""
+
         redirect to '/signup'
       else
+
         @user = User.new(:username => params[:username],:password => params[:password])
         @user.save
         session[:user_id] = @user.id
@@ -25,6 +30,7 @@ class UsersController < ApplicationController
 
     get '/login' do
       if !logged_in?
+
         erb :'users/login'
       else
         redirect to '/property'

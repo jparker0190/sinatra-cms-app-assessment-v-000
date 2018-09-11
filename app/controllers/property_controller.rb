@@ -36,7 +36,11 @@ class PropertyController < ApplicationController
   get "/property/:id" do
     redirect_if_not_logged_in
     @prop = Property.find(params[:id])
+    if @prop.user == current_user
     erb :'properties/show'
+  else
+    redirect to  '/property'
+  end
   end
 
   get '/property/:id/edit' do
