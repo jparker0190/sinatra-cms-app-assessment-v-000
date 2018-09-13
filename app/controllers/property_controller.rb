@@ -76,7 +76,7 @@ class PropertyController < ApplicationController
       if @prop.user == current_user
         @prop.update(params.select{|k|k=="name" || k=="rooms"})
         redirect "/property/#{@prop.id}"
-      else 
+      else
         redirect to '/property'
       end
     end
