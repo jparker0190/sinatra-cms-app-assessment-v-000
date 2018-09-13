@@ -48,14 +48,20 @@ class PropertyController < ApplicationController
       redirect_if_not_logged_in
       @error_message = params[:error]
       @prop = Property.find(params[:id])
-      erb :'properties/edit'
+      if @prop.user == current_user
+        erb :'properties/edit'
+      else
+        flash[:notice] = "You can't view this I am sorry!"
+        redirect to '/property'
+      end
+
     end
 
     post "/property/:id" do
      redirect_if_not_logged_in
      @prop = Property.find(params[:id])
      unless Property.valid_params?(params)
-       redirect "/property/#{@prop.id}/edit?error=invalid golf bag"
+       redirect "/property/#{@prop.id}/edit?error=invalid property"
      end
      @prop.update(params.select{|k|k=="name" || k=="rooms"})
      redirect "/property/#{@prop.id}"
