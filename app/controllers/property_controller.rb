@@ -73,8 +73,12 @@ class PropertyController < ApplicationController
       unless Property.valid_params?(params)
         redirect "/property/#{@prop.id}/edit?error=invalid property"
       end
-      @prop.update(params.select{|k|k=="name" || k=="rooms"})
-      redirect "/property/#{@prop.id}"
+      if @prop.user == current_user
+        @prop.update(params.select{|k|k=="name" || k=="rooms"})
+        redirect "/property/#{@prop.id}"
+      else
+        redirect to '/property'
+      end
     end
 
     delete '/property/:id/delete' do
